@@ -10,10 +10,10 @@ echo "Select the channel to use: Stable"
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 echo "update and install"
 sudo apt-get update
-sudo apt-get install sublime-text
-sudo apt-get install terraform
-sudo apt-get install spotify-client
-sudo apt install keepass2
-sudo apt install awscli
-sudo apt install flameshot
-sudo apt install mysql-client
+sudo apt-get install sublime-text -y
+sudo apt-get install terraform -y
+sudo apt-get install spotify-client -y
+sudo apt install keepass2 -y
+sudo apt install awscli -y
+sudo apt install flameshot -y
+sudo apt install mysql-client -y
