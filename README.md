@@ -4,4 +4,5 @@
 # backup
  - 
  rsync -auvxP /pathdeOrigem/ /pathdeDestino/ >/dev/null 2>&1
+ 
  rsync -auvxP --delete --exclude-from=/path/ignore_list.txt /pathdeOrigem/ /pathdeDestino/ >/dev/null 2>&1
