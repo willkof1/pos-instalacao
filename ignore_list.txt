@@ -1,5 +1,4 @@
 audiobook
-.aws
 .bash_history
 .bash_logout
 .bash_profile
@@ -40,7 +39,6 @@ MEGAsync Downloads/
 .python_history
 .screenlayout
 .selected_editor
-.ssh
 .ssr
 .sudo_as_admin_successful
 .terraform.d
