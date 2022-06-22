@@ -1,6 +1,5 @@
 #!/bin/bash
-export DEBIAN_FRONTEND=noninteractive
-#atualiza os repositores com base em source.list#
+#######################SCRIPT PARA ATUALIZAR O SISTEMA#####################
 PACOTES=`sudo apt update`
 if [[ "$?" -ne 0 ]]
   then
@@ -16,7 +15,8 @@ if [[ -n $RESULTADO ]]
       exit 0
 fi
 sudo apt list --upgradable
-echo "Vai atualizar o sistema ? S/N"
+echo ""
+echo -e "\e[1;43m Vai atualizar o sistema ? S/N \e[0m"
 read escolha
 if [[ $escolha != S ]]
   then
