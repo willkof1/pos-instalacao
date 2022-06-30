@@ -1,8 +1,16 @@
 #!/bin/bash
-echo "install dependencias"
-sudo apt install apt-transport-https gnupg software-properties-common curl wget gpg ca-certificates lsb-release software-properties-common -y
-apt update && apt upgrade -y
-echo 'deb [signed-by=/usr/share/keyrings/sublimehq.gpg] https://download.sublimetext.com/ apt/stable/' | sudo tee /etc/apt/sources.list.d/sublime-text.list
+####Script para instalar alguns coisas default (que eu uso) pos instalação do ubuntu####
+####Como tenho minha /home separada apos a instalação, muitas configs serão lidas de lá####
+
+echo "install dependencias/others"
+sudo apt update && sudo apt upgrade -y
+sudo apt install apt-transport-https gnupg software-properties-common curl wget gpg ca-certificates flameshot \
+awscli mysql-client net-tools telegram-desktop nmap neofetch lsb-release software-properties-common build-essential \
+git transmission-daemon neofetch gsmartcontrol tasksel  -y
+
+echo "install sublime text"
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 sudo apt update && sudo apt install sublime-text -y
 
 echo "add repo terraform"
@@ -23,6 +31,10 @@ rm -f packages.microsoft.gpg wget-log
 
 echo "install protonvpn"
 wget https://protonvpn.com/download/protonvpn-stable-release_1.0.1-1_all.deb
-sudo dpkg -i protonvpn-stable-release_1.0.1-1_all.deb -y
+sudo dpkg -i protonvpn-stable-release_1.0.1-1_all.deb
 sudo apt update && sudo apt-get install protonvpn
-sudo apt install flameshot awscli mysql-client net-tools telegram-desktop nmap neofetch -y
+
+echo "install zsh"
+sudo apt install zsh -y
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/

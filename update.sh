@@ -5,6 +5,7 @@ if [[ "$?" -ne 0 ]]
   then
       echo
       echo -e "\t\t\t\t\t\t\033[1;31m Ocorreu um erro durante o update dos repos! \033[0m"
+      echo ""
       exit 0
 fi
 RESULTADO=`grep "Todos" <<<$PACOTES` && `grep "All" <<<$PACOTES`
@@ -12,16 +13,19 @@ if [[ -n $RESULTADO ]]
   then
       echo
       echo -e "\t\t\t\t\t\t\033[1;32m Sistema Atualizado! S2 \033[0m"
+      echo ""
       exit 0
 fi
-sudo apt list --upgradable
+sudo apt list --upgradable -a
 echo ""
 echo -e "\e[1;43m Vai atualizar o sistema ? S/N \e[0m"
+echo ""
 read escolha
 if [[ $escolha != S ]]
   then
       echo
       echo -e "\t\t\t\t\t\t\033[1;31m Usuario não aceitou atualizar o sistema! \033[0m"
+      echo ""
       exit 0
 fi
 sudo apt upgrade -y
