@@ -16,7 +16,7 @@ if [[ -n $RESULTADO ]]
       echo ""
       exit 0
 fi
-sudo apt list --upgradable -a
+sudo apt list --upgradable
 echo ""
 echo -e "\e[1;43m Vai atualizar o sistema ? S/N \e[0m"
 echo ""
