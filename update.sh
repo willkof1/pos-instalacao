@@ -4,7 +4,7 @@ PACOTES=`sudo apt update`
 if [[ "$?" -ne 0 ]]
   then
       echo
-      echo -e "\t\t\t\t\t\t\033[1;31m Ocorreu um erro durante o update dos repos! \033[0m"
+      echo -e "\t\t\t\t\t\t\033[1;41m Ocorreu um erro durante o update dos repos! \033[0m"
       echo ""
       exit 0
 fi
