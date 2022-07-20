@@ -4,7 +4,7 @@
 
 echo "install dependencias/others"
 sudo apt update && sudo apt upgrade -y
-sudo apt install apt-transport-https gnupg software-properties-common curl wget gpg ca-certificates flameshot \
+sudo apt install vim apt-transport-https gnupg software-properties-common curl wget gpg ca-certificates flameshot \
 awscli mysql-client net-tools telegram-desktop nmap neofetch lsb-release software-properties-common build-essential \
 git transmission-daemon neofetch gsmartcontrol tasksel  -y
 
@@ -37,4 +37,5 @@ sudo apt update && sudo apt-get install protonvpn
 echo "install zsh"
 sudo apt install zsh -y
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/
+#git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/
+sudo apt install zsh-syntax-highlighting
