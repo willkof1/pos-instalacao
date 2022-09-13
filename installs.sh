@@ -35,7 +35,15 @@ sudo dpkg -i protonvpn-stable-release_1.0.1-1_all.deb
 sudo apt update && sudo apt-get install protonvpn
 
 echo "install zsh"
-sudo apt install zsh -y
+sudo apt install zsh zsh-syntax-highlighting -y
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 #git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/
-sudo apt install zsh-syntax-highlighting
+
+echo "install docker"
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-compose -y

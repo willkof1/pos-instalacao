@@ -1,6 +1,6 @@
 #!/bin/bash
-#script para listar os ultimos 10 processos que estão consumindo mais memoria#
-#creditos = https://www.shellhacks.com/find-top-processes-memory-usage-linux#
+#script para listar os ultimos 5 processos que estão consumindo mais memoria#
+#Referencia: https://www.shellhacks.com/find-top-processes-memory-usage-linux#
 ps axo rss,comm,pid \
 | awk '{ proc_list[$2]++; proc_list[$2 "," 1] += $1; } \
 END { for (proc in proc_list) { printf("%d\t%s\n", \
