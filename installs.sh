@@ -45,5 +45,12 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o 
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+echo setxkbmap -model abnt -layout us -variant intl >> ~/.zshrc && source ~/.zshrc
 sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-compose -y
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
+sudo echo options hid_apple fnmode=2 > /etc/modprobe.d/hid_apple.conf
+sudo update-initramfs -u -k all
+sudo reboot
