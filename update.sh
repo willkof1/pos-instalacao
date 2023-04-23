@@ -18,10 +18,10 @@ if [[ -n $RESULTADO ]]
 fi
 sudo apt list --upgradable
 echo ""
-echo -e "\e[1;43m Vai atualizar o sistema ? S/N \e[0m"
+echo -e "\e[1;43m Vai atualizar o sistema ? yes/no \e[0m"
 echo ""
 read escolha
-if [[ $escolha != S ]]
+if [[ $escolha != yes ]]
   then
       echo
       echo -e "\t\t\t\t\t\t\033[1;31m Usuario não aceitou atualizar o sistema! \033[0m"
