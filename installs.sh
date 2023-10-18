@@ -4,9 +4,16 @@
 
 echo "install dependencias/others"
 sudo apt update && sudo apt upgrade -y
-sudo apt install vim apt-transport-https gnupg software-properties-common curl wget gpg ca-certificates flameshot \
-awscli mysql-client net-tools telegram-desktop nmap neofetch lsb-release software-properties-common build-essential \
-git transmission-daemon neofetch gsmartcontrol tasksel  -y
+sudo apt install vim apt-transport-https gnupg software-properties-common curl wget gpg ca-certificates flameshot \ awscli mysql-client net-tools telegram-desktop nmap neofetch lsb-release software-properties-common build-essential \ git transmission-daemon neofetch gsmartcontrol tasksel  -y
+
+echo "install google-chrome"
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+sudo apt-get install -f
+
+echo "install megasync"
+wget https://mega.nz/linux/repo/xUbuntu_22.04/amd64/megasync-xUbuntu_22.04_amd64.deb
+sudo apt install ./megasync-xUbuntu_22.04_amd64.deb
 
 echo "install sublime text"
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg
@@ -19,25 +26,39 @@ sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(l
 sudo apt update && sudo apt install terraform -y
 
 echo "add repo spotify"
-wget -O- https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/spotify.gpg
-echo "deb [signed-by=/usr/share/keyrings/spotify.gpg] http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
 sudo apt update && sudo apt install spotify-client -y
 
+echo "add repo M$ vscode"
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
-sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-sudo apt update && sudo apt install code # or code-insiders
-rm -f packages.microsoft.gpg wget-log
+sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+rm -f packages.microsoft.gpg
+sudo apt update && sudo apt install code
+
+wget "https://discordapp.com/api/download?platform=linux&format=deb" -O discord.deb
+sudo dpkg -i discord.deb
+sudo apt-get install -f
 
 echo "install protonvpn"
-wget https://protonvpn.com/download/protonvpn-stable-release_1.0.1-1_all.deb
-sudo dpkg -i protonvpn-stable-release_1.0.1-1_all.deb
-sudo apt update && sudo apt-get install protonvpn
+wget "https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.3-2_all.deb" -O protonvpn.deb
+sudo dpkg -i protonvpn.deb
+echo "check the repo package integrity"
+echo "c68a0b8dad58ab75080eed7cb989e5634fc88fca051703139c025352a6ee19ad  protonvpn-stable-release_1.0.3-2_all.deb" | sha256sum --check -
+sleep 20
+sudo apt update
+sudo apt install proton-vpn-gnome-desktop
+sudo apt -f install
 
 echo "install zsh"
-sudo apt install zsh zsh-syntax-highlighting -y
+sudo apt install zsh -y
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-#git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/
+
+#echo "gnome-cedilha"
+#wget -q https://raw.githubusercontent.com/marcopaganini/gnome-cedilla-fix/master/fix-cedilla -O fix-cedilla
+#chmod 755 fix-cedilla
+#./fix-cedilla
 
 echo "install docker"
 sudo mkdir -p /etc/apt/keyrings
@@ -51,6 +72,6 @@ sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin doc
 sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
-sudo echo options hid_apple fnmode=2 > /etc/modprobe.d/hid_apple.conf
+#sudo echo options hid_apple fnmode=2 > /etc/modprobe.d/hid_apple.conf
 sudo update-initramfs -u -k all
 sudo reboot
